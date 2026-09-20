@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rajesh-tv-repair.pages.dev/sitemap.xml
