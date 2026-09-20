@@ -71,6 +71,12 @@
     </script>
 </head>
 <body>
+    <!-- Full Page Loading Screen -->
+    <div id="loading-screen">
+        <img src="logo.jpg" alt="Rajesh TV Repair" style="width: 120px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+        <div class="spinner"></div>
+    </div>
+
     <header class="header">
         <div class="container header-container">
             <div class="logo">
@@ -190,6 +196,13 @@
         </div>
     </footer>
     <script>
+        // Fade out loading screen when page is ready
+        window.addEventListener("load", function() {
+            var loader = document.getElementById("loading-screen");
+            loader.style.opacity = "0";
+            setTimeout(function() { loader.style.display = "none"; }, 500);
+        });
+
         // Lazy load the heavy 19MB video so the website text and images load at lightning speed first
         document.addEventListener("DOMContentLoaded", function() {
             setTimeout(function() {
