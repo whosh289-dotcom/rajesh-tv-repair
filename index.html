@@ -71,12 +71,6 @@
     </script>
 </head>
 <body>
-    <!-- Full Page Loading Screen -->
-    <div id="loading-screen">
-        <img src="logo.jpg" alt="Rajesh TV Repair" style="width: 120px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
-        <div class="spinner"></div>
-    </div>
-
     <header class="header">
         <div class="container header-container">
             <div class="logo">
@@ -98,7 +92,8 @@
                     </div>
                     <h2>Fast & Reliable TV Repair in Nagpur</h2>
                     <p>We specialize in repairing all brands of LED and LCD TVs. From panel replacements to motherboard repairs, we get your screen back to life quickly.</p>
-                    <div class="hero-video" style="max-width: 600px; margin: 0 auto 40px auto; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); border: 8px solid white; transform: rotate(-1deg); transition: var(--transition); background: black;">
+                    <div class="hero-video" style="position: relative; max-width: 600px; margin: 0 auto 40px auto; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); border: 8px solid white; transform: rotate(-1deg); transition: var(--transition); background: black;">
+                        <div id="video-spinner" class="video-spinner"></div>
                         <video id="hero-vid" autoplay loop muted playsinline poster="images/machine.png" style="width: 100%; height: auto; display: block;">
                             <!-- Source is injected via JavaScript below to make the page load instantly -->
                         </video>
@@ -196,15 +191,16 @@
         </div>
     </footer>
     <script>
-        // Fade out loading screen when page is ready
-        window.addEventListener("load", function() {
-            var loader = document.getElementById("loading-screen");
-            loader.style.opacity = "0";
-            setTimeout(function() { loader.style.display = "none"; }, 500);
-        });
-
         // Lazy load the heavy 19MB video so the website text and images load at lightning speed first
         document.addEventListener("DOMContentLoaded", function() {
+            var video = document.getElementById('hero-vid');
+            
+            // Hide spinner when video actually starts playing
+            video.addEventListener('playing', function() {
+                var spinner = document.getElementById('video-spinner');
+                if (spinner) spinner.style.display = 'none';
+            });
+
             setTimeout(function() {
                 var video = document.getElementById('hero-vid');
                 var source = document.createElement('source');
